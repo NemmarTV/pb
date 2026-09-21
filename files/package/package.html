@@ -3,203 +3,211 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prime Blog — CF-PH Download</title>
+  <title>Prime Resources Private — Downloads</title>
   <link rel="icon" href="../../images/pt-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <!-- ============================================================
-       SERVER LOCK SCREEN
-  ============================================================ -->
-  <div id="serverLock" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
-    <div class="lock-box">
-
-      <!-- Animated logo glow ring -->
-      <div class="lock-ring" aria-hidden="true">
-        <img src="../../images/pt-logo.png" alt="Prime Blog Logo" class="lock-logo" />
+  <!-- ========== SCREEN 1: ENTRY CARD ========== -->
+  <div id="screenEntry" class="screen screen-entry">
+    <div class="entry-card">
+      <div class="entry-tags">
+        <span class="tag tag-muted">PRIVATE</span>
+        <span class="tag tag-green">OPEN</span>
       </div>
-
-      <div class="lock-badge">⚠ RESTRICTED ACCESS</div>
-      <h1 class="lock-title" id="lockTitle">Server Protected</h1>
-      <p class="lock-sub">Authorized personnel only</p>
-
-      <p class="lock-body">
-        This download system is restricted to <strong>authorized users only</strong>.<br>
-        Any misuse, exploit attempt, or bypass attempt will result in
-        a <strong>permanent account ban</strong> with no appeal.<br><br>
-        Enter the access password below to continue.
+      <h1 class="entry-title">Prime Resources Private</h1>
+      <div class="entry-thumb">
+        <img src="../../images/pt-logo.png" alt="PT CFPH" onerror="this.style.display='none'" />
+      </div>
+      <p class="entry-desc">
+        Authorized private downloads for Prime Blog members — CF-PH client packages and exclusive resources.
       </p>
-
-      <!-- Fake scan status -->
-      <div class="scan-row" aria-live="polite">
-        <span class="scan-dot" aria-hidden="true"></span>
-        <span id="scanStatus">Anti-Cheat Scanning…</span>
+      <div class="entry-meta">
+        <span class="chip">SECURE</span>
+        <span class="chip">MULTI-FILE</span>
       </div>
-
-      <!-- Password input -->
-      <div class="lock-field">
-        <div class="lock-input-wrap">
-          <input
-            type="password"
-            id="serverPassword"
-            placeholder="Enter access password"
-            autocomplete="off"
-            aria-label="Access password"
-          />
-          <button type="button" id="lockTogglePw" class="lock-eye" aria-label="Toggle password visibility">👁</button>
-        </div>
-        <p class="lock-error" id="lockError" aria-live="assertive">Incorrect password. Access denied.</p>
-      </div>
-
-      <!-- Countdown + button -->
-      <div class="lock-countdown" id="lockCountdown" aria-live="polite">Wait <span id="countNum">8</span>s to activate…</div>
-
-      <button id="enterBtn" class="btn btn-primary lock-enter" type="button" disabled>
-        ENTER SERVER
-      </button>
+      <button type="button" id="btnEnterGate" class="btn-enter">ENTER</button>
     </div>
   </div>
-  <!-- /SERVER LOCK -->
 
+  <!-- ========== SCREEN 2: SERVER LOGIN ========== -->
+  <div id="serverLock" class="screen screen-lock" style="display:none;" role="dialog" aria-modal="true">
+    <div class="lock-box">
+      <div class="lock-ring" aria-hidden="true">
+        <img src="../../images/pt-logo.png" alt="Logo" class="lock-logo" />
+      </div>
+      <div class="lock-badge">⚠ RESTRICTED ACCESS</div>
+      <h1 class="lock-title">Server Protected</h1>
+      <p class="lock-sub">Authorized personnel only</p>
+      <div class="lock-body-box">
+        <p>
+          This download system is restricted to <strong>authorized users only</strong>.
+          Any misuse, exploit attempt, or bypass attempt will result in a
+          <strong>permanent account ban</strong> with no appeal.
+        </p>
+        <p>Enter the access password below to continue.</p>
+      </div>
+      <div class="scan-row">
+        <span class="scan-dot"></span>
+        <span id="scanStatus">Anti-Cheat Scanning</span>
+      </div>
+      <div class="lock-field">
+        <div class="lock-input-wrap">
+          <input type="password" id="serverPassword" placeholder="Enter access password" autocomplete="off" />
+          <button type="button" id="lockTogglePw" class="lock-eye" aria-label="Show password">👁</button>
+        </div>
+        <p class="lock-error" id="lockError">Incorrect password. Access denied.</p>
+      </div>
+      <div class="lock-countdown" id="lockCountdown">Wait <span id="countNum">6</span>s to activate…</div>
+      <button type="button" id="enterBtn" class="btn-lock" disabled>ENTER SERVER</button>
+    </div>
+  </div>
 
-  <!-- ============================================================
-       MAIN PAGE
-  ============================================================ -->
-  <div id="mainContent" style="display:none;">
-
-    <!-- Mini header -->
+  <!-- ========== SCREEN 3: DOWNLOADS ========== -->
+  <div id="mainContent" class="screen screen-main" style="display:none;">
     <header class="pkg-header">
-      <a href="../../index.html" class="pkg-brand" aria-label="Back to Prime Blog">
-        <img src="../../images/pt-logo.png" alt="Prime Blog Logo" class="pkg-logo" />
-        <span class="pkg-brand-name">Prime Blog</span>
+      <a href="../../index.html" class="pkg-brand">
+        <img src="../../images/pt-logo.png" alt="" />
+        <span>Prime Blog</span>
       </a>
-      <span class="version-badge">v20.5.1</span>
+      <span class="pkg-ver">v20.5.1</span>
     </header>
 
-    <main class="page">
-      <div class="page-head-block">
-        <div class="badge">⬇ Downloads</div>
-        <h1 class="page-title">CF‑PH Package</h1>
-        <p class="muted">Authorized users only. Do not redistribute.</p>
+    <main class="pkg-main">
+      <div class="pkg-hero">
+        <span class="pkg-pill">⬇ DOWNLOADS</span>
+        <h1 class="pkg-title">Prime Resources <span>Private</span></h1>
+        <p class="pkg-sub">Authorized users only. Do not redistribute.</p>
       </div>
 
-      <!-- DOWNLOAD CARD -->
-      <article class="card dl hover-rise" id="dlCard">
-        <div class="card-inner" data-file="CF-PH.rar">
-
-          <div class="dl-top">
-            <span class="chip">Resources</span>
-            <span class="chip chip-live">Updated 2026</span>
-            <span class="chip chip-new">Exclusive</span>
+      <div class="file-grid" id="fileGrid">
+        <!-- CF-PH -->
+        <article class="file-card" data-id="cfph" data-file="CF-PH.rar" data-password="1107" data-size="~1.2 MB" data-name="CF-PH PT 2026">
+          <div class="file-card-top">
+            <span class="tag tag-muted">RESOURCES</span>
+            <span class="tag tag-green">UPDATED 2026</span>
+            <span class="tag tag-gold">EXCLUSIVE</span>
           </div>
-
-          <div class="dl-file-row">
-            <div class="dl-icon" aria-hidden="true">📦</div>
+          <div class="file-card-body">
+            <div class="file-icon">📦</div>
             <div>
               <h3>CF-PH PT 2026</h3>
-              <p class="muted" style="margin:4px 0 0;">Private package — Prime Blog authorized players only.</p>
+              <p>Private package — Prime Blog authorized players only.</p>
+              <div class="file-meta">
+                <span class="chip">RAR</span>
+                <span class="chip">~1.2 MB</span>
+                <span class="chip">CROSSFIRE PH</span>
+              </div>
             </div>
           </div>
-
-          <div class="dl-meta">
-            <span class="chip">RAR</span>
-            <span class="chip">~1.2 MB</span>
-            <span class="chip">CrossFire PH</span>
+          <div class="file-actions">
+            <button type="button" class="btn-dl btn-download" data-id="cfph">⬇ Download</button>
+            <a href="../../download.html" class="btn-ghost-sm">All Downloads</a>
           </div>
+        </article>
 
-          <div class="dl-actions">
-            <button class="btn btn-primary" id="btnDownload" type="button">⬇ Download</button>
-            <a class="btn btn-ghost" href="../../blog.html">Read Update</a>
-            <a class="btn btn-blue" href="../../download.html">All Downloads</a>
+        <!-- File 1101 -->
+        <article class="file-card" data-id="res1101" data-file="resource-1101.rar" data-password="1101" data-size="~—" data-name="Prime Resource 1101">
+          <div class="file-card-top">
+            <span class="tag tag-muted">RESOURCES</span>
+            <span class="tag tag-green">PRIVATE</span>
           </div>
-        </div>
-      </article>
+          <div class="file-card-body">
+            <div class="file-icon">📁</div>
+            <div>
+              <h3>Prime Resource 1101</h3>
+              <p>Additional private resource pack. Place your file as <code>resource-1101.rar</code>.</p>
+              <div class="file-meta">
+                <span class="chip">RAR</span>
+                <span class="chip">PASS 1101</span>
+              </div>
+            </div>
+          </div>
+          <div class="file-actions">
+            <button type="button" class="btn-dl btn-download" data-id="res1101">⬇ Download</button>
+          </div>
+        </article>
 
-      <!-- Warning block -->
-      <div class="warning-block">
-        <div class="warning-icon" aria-hidden="true">💀</div>
-        <div>
-          <strong>System Alert</strong>
-          <p class="muted">
-            Only elite users may proceed. Misuse will trigger a permanent ban.
-            Any attempt to bypass security (Deep Freeze included) will be logged
-            and reported. Proceed at your own risk. Contact the owner if you dare.
-          </p>
-        </div>
+        <!-- File 1105 -->
+        <article class="file-card" data-id="res1105" data-file="resource-1105.rar" data-password="1105" data-size="~—" data-name="Prime Resource 1105">
+          <div class="file-card-top">
+            <span class="tag tag-muted">RESOURCES</span>
+            <span class="tag tag-green">PRIVATE</span>
+          </div>
+          <div class="file-card-body">
+            <div class="file-icon">📁</div>
+            <div>
+              <h3>Prime Resource 1105</h3>
+              <p>Additional private resource pack. Place your file as <code>resource-1105.rar</code>.</p>
+              <div class="file-meta">
+                <span class="chip">RAR</span>
+                <span class="chip">PASS 1105</span>
+              </div>
+            </div>
+          </div>
+          <div class="file-actions">
+            <button type="button" class="btn-dl btn-download" data-id="res1105">⬇ Download</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="system-alert">
+        <div class="alert-title">☠ System Alert</div>
+        <p>
+          Only elite users may proceed. Misuse will trigger a permanent ban.
+          Any attempt to bypass security will be logged. Proceed at your own risk.
+          Contact the owner if you need access.
+        </p>
       </div>
     </main>
 
-    <!-- Mini footer -->
     <footer class="pkg-footer">
-      <span>© 2026 Prime Blog (Formerly LiloanUnited CFPH)</span>
-      <a href="#" style="opacity:.45;pointer-events:none;" title="Temporarily unavailable">Contact (soon)</a>
-      <a href="../../index.html">Home</a>
+      <span>© 2026 Prime Blog · Prime Resources Private</span>
+      <span>
+        <a href="../../contact.html">Contact</a> ·
+        <a href="../../index.html">Home</a>
+      </span>
     </footer>
-
   </div>
-  <!-- /MAIN CONTENT -->
 
-
-  <!-- ============================================================
-       DOWNLOAD MODAL
-  ============================================================ -->
-  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-
-      <div class="modal-header">
+  <!-- ========== SCREEN 4: DOWNLOAD MODAL ========== -->
+  <div id="dlModal" class="modal" style="display:none;" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-head">
         <div>
-          <div class="modal-title" id="modalTitle">Preparing Download…</div>
-          <div class="muted" id="modalSub" style="font-size:13px;margin-top:2px;">Verifying authorization…</div>
+          <h2 id="modalTitle">Preparing Download…</h2>
+          <p id="modalSub">Verifying authorization…</p>
         </div>
-        <button class="modal-close" id="btnClose" type="button" aria-label="Close">×</button>
+        <button type="button" id="modalClose" class="modal-x" aria-label="Close">×</button>
       </div>
 
-      <div class="modal-body">
-
-        <!-- Progress -->
+      <div class="progress-block">
         <div class="progress-row">
-          <span class="muted" id="statusText">Starting…</span>
-          <span class="muted"><span id="pctText">0</span>%</span>
+          <span id="progressLabel">Initializing…</span>
+          <span id="progressPct">0%</span>
         </div>
-        <div class="bar" aria-label="Download progress">
-          <div id="barFill"></div>
-        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
 
-        <!-- Proceed row -->
-        <div class="proceed-row">
-          <button class="btn btn-primary" id="btnProceed" type="button" disabled>
-            Proceed to Download →
-          </button>
-        </div>
-
-        <!-- Password area -->
-        <div class="password-wrap" id="passwordWrap">
-          <div class="pw-label muted">Enter password to unlock download:</div>
-          <div class="field">
-            <input
-              id="pwInput"
-              type="password"
-              placeholder="Password"
-              autocomplete="off"
-              aria-label="Download password"
-            />
-            <button type="button" id="togglePassword" class="toggle-btn" aria-label="Toggle password visibility">👁</button>
-            <button class="btn btn-primary" id="btnConfirm" type="button">Confirm</button>
+      <div id="modalReady" class="modal-ready" style="display:none;">
+        <button type="button" id="btnProceed" class="btn-proceed">Proceed to Download →</button>
+        <hr class="modal-hr" />
+        <p class="modal-hint-label">Enter password to unlock download:</p>
+        <div class="modal-pw-row">
+          <div class="lock-input-wrap modal-input">
+            <input type="password" id="filePassword" placeholder="Password" autocomplete="off" />
+            <button type="button" id="fileTogglePw" class="lock-eye">👁</button>
           </div>
-          <div class="error" id="pwError" role="alert">❌ Incorrect password. Try again.</div>
-          <div class="hint muted">Hint: Contact Prime Blog management for access.</div>
+          <button type="button" id="btnConfirmPw" class="btn-confirm">Confirm</button>
         </div>
-
+        <p class="modal-error" id="filePwError">Incorrect password.</p>
+        <p class="modal-hint">Hint: Contact Prime Blog management for access.</p>
       </div>
     </div>
   </div>
-  <!-- /MODAL -->
 
-  <script src="js/main.js"></script>
   <script src="js/f12.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

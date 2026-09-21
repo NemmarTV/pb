@@ -3,8 +3,6 @@
    Dark agency aesthetic · pill nav · orange accent
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-
 :root {
   /* Nexivo-inspired palette */
   --pb-accent: #FF6B02;
@@ -45,9 +43,9 @@
   --trans: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --trans-slow: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
-  --font-head: 'Syne', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-btn: 'Syne', system-ui, sans-serif;
+  --font-head: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-btn: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
 html[data-theme="light"] {
@@ -1539,7 +1537,7 @@ body {
 }
 
 h1, h2, h3, h4, .brand-name, .hero-title, .section-label {
-  font-family: var(--font-head) !important;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
   letter-spacing: -0.03em;
 }
 
@@ -1606,7 +1604,7 @@ h1, h2, h3, h4, .brand-name, .hero-title, .section-label {
   border: 1px solid rgba(255, 255, 255, 0.2) !important;
   color: #fff !important;
   border-radius: var(--radius-pill) !important;
-  font-family: var(--font-head) !important;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
   font-size: 0.72rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.05em;
@@ -1771,7 +1769,7 @@ input:focus, select:focus, textarea:focus {
   border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 .footer-title {
-  font-family: var(--font-head) !important;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
 }
 
 /* Progress bars */

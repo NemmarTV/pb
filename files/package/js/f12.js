@@ -1,71 +1,99 @@
-/* ================================================
-   Prime Blog — Server Lock Protection v20.5.1
-   Anti-cheat gate + F12 / dev tools blocker
-   - 8 second countdown before enter
-   - Password protection (default: "1111")
-   - Disables right-click, F12, DevTools hotkeys
-================================================ */
+/* Prime Resources Private — gate + login
+   Login password: 1111
+*/
+(function () {
+  var LOGIN_PASSWORD = "1111";
+  var COUNTDOWN_SECS = 6;
 
-(() => {
-  const LOCK_PASSWORD = "1111"; // Change to your desired password
+  var screenEntry = document.getElementById("screenEntry");
+  var serverLock = document.getElementById("serverLock");
+  var mainContent = document.getElementById("mainContent");
+  var btnEnterGate = document.getElementById("btnEnterGate");
+  var passwordInput = document.getElementById("serverPassword");
+  var enterBtn = document.getElementById("enterBtn");
+  var lockError = document.getElementById("lockError");
+  var lockTogglePw = document.getElementById("lockTogglePw");
+  var countNum = document.getElementById("countNum");
+  var lockCountdown = document.getElementById("lockCountdown");
+  var scanStatus = document.getElementById("scanStatus");
 
-  const serverLock = document.getElementById("serverLock");
-  const mainContent = document.getElementById("mainContent");
-  const enterBtn = document.getElementById("enterBtn");
-  const passwordInput = document.getElementById("serverPassword");
-  const countdownEl = document.getElementById("lockCountdown");
-  const countNum = document.getElementById("countNum");
-  const scanStatus = document.getElementById("scanStatus");
-  const lockError = document.getElementById("lockError");
-  const lockTogglePw = document.getElementById("lockTogglePw");
+  var canEnter = false;
+  var remaining = COUNTDOWN_SECS;
 
-  let countdown = 8;
-  let canEnter = false;
-
-  // ===== COUNTDOWN TIMER =====
-  const countdownTimer = setInterval(() => {
-    countdown--;
-    countNum.textContent = String(countdown);
-
-    if (countdown <= 0) {
-      clearInterval(countdownTimer);
-      canEnter = true;
-      countdownEl.textContent = "Button is now active. Enter password to proceed.";
-      enterBtn.disabled = false;
-    }
-  }, 1000);
-
-  // ===== FAKE SCAN ANIMATION =====
-  let dots = 0;
-  const scanTimer = setInterval(() => {
-    dots = (dots + 1) % 4;
-    scanStatus.textContent = "Anti-Cheat Scanning" + ".".repeat(dots);
-  }, 500);
-
-  // ===== ENTER BUTTON CLICK =====
-  enterBtn?.addEventListener("click", () => {
-    if (!canEnter) return;
-
-    const entered = passwordInput.value.trim();
-
-    if (entered !== LOCK_PASSWORD) {
-      lockError.style.display = "block";
-      passwordInput.focus();
-      passwordInput.select();
-      setTimeout(() => {
-        lockError.style.display = "none";
-      }, 3000);
-      return;
-    }
-
-    // Password correct — unlock
-    serverLock.style.display = "none";
-    mainContent.style.display = "block";
-    clearInterval(scanTimer);
+  // Screen 1 → Screen 2
+  btnEnterGate && btnEnterGate.addEventListener("click", function () {
+    if (screenEntry) screenEntry.style.display = "none";
+    if (serverLock) serverLock.style.display = "flex";
+    startCountdown();
+    startScan();
   });
 
-  // ===== TOGGLE PASSWORD VISIBILITY =====
-  lockTogglePw?.addEventListener("click", function () {
+  function startCountdown() {
+    canEnter = false;
+    remaining = COUNTDOWN_SECS;
+    if (enterBtn) {
+      enterBtn.disabled = true;
+      enterBtn.textContent = "ENTER SERVER";
+    }
+    if (lockCountdown) lockCountdown.style.display = "block";
+    if (countNum) countNum.textContent = String(remaining);
+
+    var t = setInterval(function () {
+      remaining--;
+      if (countNum) countNum.textContent = String(Math.max(0, remaining));
+      if (remaining <= 0) {
+        clearInterval(t);
+        canEnter = true;
+        if (enterBtn) enterBtn.disabled = false;
+        if (lockCountdown) {
+          lockCountdown.textContent = "Ready — enter password to proceed.";
+        }
+      }
+    }, 1000);
+  }
+
+  var scanTimer = null;
+  function startScan() {
+    var dots = 0;
+    if (scanTimer) clearInterval(scanTimer);
+    scanTimer = setInterval(function () {
+      dots = (dots % 3) + 1;
+      if (scanStatus) scanStatus.textContent = "Anti-Cheat Scanning" + ".".repeat(dots);
+    }, 500);
+  }
+
+  function tryLogin() {
+    if (!canEnter) return;
+    var entered = (passwordInput && passwordInput.value || "").trim();
+    if (entered !== LOGIN_PASSWORD) {
+      if (lockError) {
+        lockError.style.display = "block";
+        setTimeout(function () { lockError.style.display = "none"; }, 2500);
+      }
+      if (passwordInput) {
+        passwordInput.focus();
+        passwordInput.select();
+      }
+      return;
+    }
+    if (serverLock) serverLock.style.display = "none";
+    if (mainContent) mainContent.style.display = "block";
+    if (scanTimer) clearInterval(scanTimer);
+    try {
+      sessionStorage.setItem("pb_pkg_authed", "1");
+    } catch (e) {}
+  }
+
+  enterBtn && enterBtn.addEventListener("click", tryLogin);
+  passwordInput && passwordInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      tryLogin();
+    }
+  });
+
+  lockTogglePw && lockTogglePw.addEventListener("click", function () {
+    if (!passwordInput) return;
     if (passwordInput.type === "password") {
       passwordInput.type = "text";
       this.textContent = "🙈";
@@ -75,57 +103,20 @@
     }
   });
 
-  // ===== ENTER KEY IN PASSWORD FIELD =====
-  passwordInput?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+  // Resume if already authed this session
+  try {
+    if (sessionStorage.getItem("pb_pkg_authed") === "1") {
+      if (screenEntry) screenEntry.style.display = "none";
+      if (serverLock) serverLock.style.display = "none";
+      if (mainContent) mainContent.style.display = "block";
+    }
+  } catch (e) {}
+
+  // Light anti-devtools (optional)
+  document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "F12" || (e.ctrlKey && e.shiftKey && "ijc".indexOf(e.key.toLowerCase()) >= 0)) {
       e.preventDefault();
-      enterBtn.click();
     }
   });
-
-  // ===== ANTI-CHEAT: DISABLE DEVELOPER TOOLS =====
-
-  // Right-click context menu
-  document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    return false;
-  });
-
-  // F12 and common DevTools hotkeys
-  document.addEventListener("keydown", (e) => {
-    const isFunctional = e.key === "F12";
-    const isCtrlShiftI = e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i";
-    const isCtrlShiftJ = e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j";
-    const isCtrlShiftC = e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c";
-
-    if (isFunctional || isCtrlShiftI || isCtrlShiftJ || isCtrlShiftC) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      return false;
-    }
-  });
-
-  // Additional protection: Detect if DevTools is open (basic check)
-  let devToolsOpen = false;
-
-  // Check for localStorage access (some tools can't access it when DevTools are open)
-  const checkDevTools = () => {
-    const start = performance.now();
-    debugger; // eslint-disable-line no-debugger
-    const end = performance.now();
-
-    if (end - start > 100) {
-      devToolsOpen = true;
-    }
-  };
-
-  // Run check periodically (optional - comment out if too aggressive)
-  // setInterval(checkDevTools, 1000);
-
-  // Cleanup on page unload
-  window.addEventListener("beforeunload", () => {
-    clearInterval(countdownTimer);
-    clearInterval(scanTimer);
-  });
-
 })();

@@ -1,174 +1,144 @@
-/* ================================================
-   Prime Blog — Package Download Modal v20.5.1
-   Password-protected download system
-   - Progress simulation
-   - Password validation
-   - File download trigger
-================================================ */
+/* Prime Resources Private — download modal + per-file passwords
+   CF-PH: 1107 | Resource 1101: 1101 | Resource 1105: 1105
+*/
+(function () {
+  var modal = document.getElementById("dlModal");
+  var modalClose = document.getElementById("modalClose");
+  var modalTitle = document.getElementById("modalTitle");
+  var modalSub = document.getElementById("modalSub");
+  var progressLabel = document.getElementById("progressLabel");
+  var progressPct = document.getElementById("progressPct");
+  var progressFill = document.getElementById("progressFill");
+  var modalReady = document.getElementById("modalReady");
+  var btnProceed = document.getElementById("btnProceed");
+  var filePassword = document.getElementById("filePassword");
+  var fileTogglePw = document.getElementById("fileTogglePw");
+  var btnConfirmPw = document.getElementById("btnConfirmPw");
+  var filePwError = document.getElementById("filePwError");
 
-(() => {
-  const PASSWORD = "1111";
+  var current = null; // { file, password, name }
+  var progressDone = false;
+  var unlocked = false;
+  var progressTimer = null;
 
-  // DOM elements
-  const btnDownload = document.getElementById("btnDownload");
-  const modalBackdrop = document.getElementById("modalBackdrop");
-  const btnClose = document.getElementById("btnClose");
-
-  const pctText = document.getElementById("pctText");
-  const barFill = document.getElementById("barFill");
-  const statusText = document.getElementById("statusText");
-  const btnProceed = document.getElementById("btnProceed");
-
-  const passwordWrap = document.getElementById("passwordWrap");
-  const pwInput = document.getElementById("pwInput");
-  const btnConfirm = document.getElementById("btnConfirm");
-  const pwError = document.getElementById("pwError");
-
-  const cardInner = document.querySelector("#dlCard .card-inner");
-
-  let progress = 0;
-  let timer = null;
-
-  // ===== MODAL CONTROL =====
-  function openModal() {
-    modalBackdrop.style.display = "flex";
-    modalBackdrop.setAttribute("aria-hidden", "false");
+  function openModal(meta) {
+    current = meta;
+    progressDone = false;
+    unlocked = false;
+    if (filePassword) filePassword.value = "";
+    if (filePwError) filePwError.style.display = "none";
+    if (modalReady) modalReady.style.display = "none";
+    if (btnProceed) btnProceed.style.display = "none";
+    if (progressFill) progressFill.style.width = "0%";
+    if (progressPct) progressPct.textContent = "0%";
+    if (progressLabel) progressLabel.textContent = "Initializing…";
+    if (modalTitle) modalTitle.textContent = "Preparing Download…";
+    if (modalSub) modalSub.textContent = "Verifying authorization…";
+    if (modal) modal.style.display = "flex";
+    runProgress();
   }
 
   function closeModal() {
-    modalBackdrop.style.display = "none";
-    modalBackdrop.setAttribute("aria-hidden", "true");
-    stopProgress();
-    resetUI();
+    if (progressTimer) clearInterval(progressTimer);
+    if (modal) modal.style.display = "none";
+    current = null;
   }
 
-  function resetUI() {
-    progress = 0;
-    pctText.textContent = "0";
-    barFill.style.width = "0%";
-    statusText.textContent = "Starting…";
-    btnProceed.disabled = true;
-
-    passwordWrap.style.display = "none";
-    pwInput.value = "";
-    pwError.style.display = "none";
-  }
-
-  function stopProgress() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
-  }
-
-  // ===== PROGRESS SIMULATION =====
-  function simulateProgress() {
-    stopProgress();
-    timer = setInterval(() => {
-      progress += 1;
-      if (progress > 100) progress = 100;
-
-      pctText.textContent = String(progress);
-      barFill.style.width = progress + "%";
-
-      if (progress < 30) statusText.textContent = "Verifying authorization…";
-      else if (progress < 60) statusText.textContent = "Loading package files…";
-      else if (progress < 90) statusText.textContent = "Finalizing download…";
-      else if (progress < 100) statusText.textContent = "Almost ready…";
-
-      if (progress >= 100) {
-        stopProgress();
-        statusText.textContent = "✓ Ready to proceed";
-        btnProceed.disabled = false;
+  function runProgress() {
+    var pct = 0;
+    var steps = [
+      { at: 15, label: "Checking access…" },
+      { at: 40, label: "Verifying package…" },
+      { at: 70, label: "Preparing secure link…" },
+      { at: 100, label: "Ready to proceed" }
+    ];
+    if (progressTimer) clearInterval(progressTimer);
+    progressTimer = setInterval(function () {
+      pct += 4;
+      if (pct > 100) pct = 100;
+      if (progressFill) progressFill.style.width = pct + "%";
+      if (progressPct) progressPct.textContent = pct + "%";
+      for (var i = 0; i < steps.length; i++) {
+        if (pct >= steps[i].at) {
+          if (progressLabel) progressLabel.textContent = steps[i].label;
+        }
       }
-    }, 20);
+      if (pct >= 100) {
+        clearInterval(progressTimer);
+        progressDone = true;
+        if (modalTitle) modalTitle.textContent = "Ready";
+        if (modalSub) modalSub.textContent = (current && current.name ? current.name + " — " : "") + "authorization verified";
+        if (modalReady) modalReady.style.display = "block";
+        if (btnProceed) btnProceed.style.display = "inline-flex";
+      }
+    }, 50);
   }
 
-  // ===== PASSWORD FLOW =====
-  function proceedToPassword() {
-    passwordWrap.style.display = "block";
-    pwInput.focus();
-  }
-
-  function startDownload(filePath) {
-    if (!filePath) {
-      statusText.textContent = "❌ Error: File path missing.";
-      return;
-    }
-
-    // Create hidden <a> to trigger download
-    const a = document.createElement("a");
-    a.href = filePath;
-    a.download = ""; // Let browser decide filename
+  function startDownload() {
+    if (!current || !current.file) return;
+    var a = document.createElement("a");
+    a.href = current.file;
+    a.download = current.file.split("/").pop() || "download.rar";
     document.body.appendChild(a);
     a.click();
-    document.body.removeChild(a);
-
+    a.remove();
     closeModal();
   }
 
-  function getFilePath() {
-    const file = cardInner?.dataset?.file || "";
-    return file.trim();
-  }
-
-  // ===== EVENT LISTENERS =====
-
-  // Download button
-  btnDownload?.addEventListener("click", () => {
-    resetUI();
-    openModal();
-    simulateProgress();
+  // Bind download buttons
+  document.querySelectorAll(".btn-download").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var card = btn.closest(".file-card");
+      if (!card) return;
+      openModal({
+        id: card.getAttribute("data-id"),
+        file: card.getAttribute("data-file"),
+        password: card.getAttribute("data-password"),
+        name: card.getAttribute("data-name") || "File"
+      });
+    });
   });
 
-  // Close modal
-  btnClose?.addEventListener("click", closeModal);
-
-  // Close on backdrop click
-  modalBackdrop?.addEventListener("click", (e) => {
-    if (e.target === modalBackdrop) closeModal();
+  btnProceed && btnProceed.addEventListener("click", function () {
+    // Show password focus
+    if (filePassword) filePassword.focus();
   });
 
-  // Proceed to password
-  btnProceed?.addEventListener("click", proceedToPassword);
-
-  // Confirm password
-  btnConfirm?.addEventListener("click", () => {
-    const entered = pwInput.value.trim();
-
-    if (entered !== PASSWORD) {
-      pwError.style.display = "block";
-      pwInput.focus();
-      pwInput.select();
+  function confirmFilePassword() {
+    if (!current || !progressDone) return;
+    var entered = (filePassword && filePassword.value || "").trim();
+    if (entered !== String(current.password || "")) {
+      if (filePwError) {
+        filePwError.style.display = "block";
+        setTimeout(function () { filePwError.style.display = "none"; }, 2500);
+      }
       return;
     }
+    unlocked = true;
+    startDownload();
+  }
 
-    pwError.style.display = "none";
-    const filePath = getFilePath();
-    startDownload(filePath);
-  });
-
-  // Enter key in password field
-  pwInput?.addEventListener("keydown", (e) => {
+  btnConfirmPw && btnConfirmPw.addEventListener("click", confirmFilePassword);
+  filePassword && filePassword.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       e.preventDefault();
-      btnConfirm.click();
+      confirmFilePassword();
     }
   });
 
-  // ===== SHOW/HIDE PASSWORD =====
-  const togglePassword = document.getElementById("togglePassword");
-  togglePassword?.addEventListener("click", function () {
-    if (pwInput.type === "password") {
-      pwInput.type = "text";
+  fileTogglePw && fileTogglePw.addEventListener("click", function () {
+    if (!filePassword) return;
+    if (filePassword.type === "password") {
+      filePassword.type = "text";
       this.textContent = "🙈";
     } else {
-      pwInput.type = "password";
+      filePassword.type = "password";
       this.textContent = "👁";
     }
   });
 
-  // ===== UNLOCK MAIN CONTENT AFTER SERVER LOCK =====
-  // (handled in f12.js, but this sets up modal after unlock)
-
+  modalClose && modalClose.addEventListener("click", closeModal);
+  modal && modal.addEventListener("click", function (e) {
+    if (e.target === modal) closeModal();
+  });
 })();
