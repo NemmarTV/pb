@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="theme-color" content="#0F0F0F" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Roblox Scripts — Prime Blog</title>
+  <link rel="icon" href="images/pt-logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/intro.css" />
+  <link rel="stylesheet" href="css/player.css" />
+</head>
+<body>
+  <div class="pb-bg" aria-hidden="true"></div>
+  <div class="pb-noise" aria-hidden="true"></div>
+<header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="brand">
+        <div class="logo">
+          <img src="images/logo-prime.png" alt="Prime Blog" onerror="this.src='images/pt-logo.png'" />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">PRIME BLOG</span>
+          <span class="brand-tag">Esports • Community • Competitive</span>
+        </div>
+      </a>
+      <div class="nav-right">
+        <span class="version-badge">v21.3</span>
+        <div class="nav-links" data-navlinks>
+          <a href="index.html" data-nav="home">Home</a>
+          <a href="about.html" data-nav="about">About</a>
+          <a href="blog.html" data-nav="blog">News</a>
+          <a href="event.html" data-nav="events">Events</a>
+     <a href="games.html" data-nav="games">Games</a>
+          <a href="reels.html" data-nav="reels">Highlights</a>
+          <a href="download.html" data-nav="downloads">Downloads</a>
+          <a href="roblox.html" data-nav="roblox">Roblox</a>
+          <a href="donate.html" data-nav="donate">Donate</a>
+          <a href="contact.html" data-nav="contact">Support</a>
+        </div>
+        <a href="contact.html" class="btn-discord" title="Discord server locked — DM owner">Discord 🔒</a>
+        <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>🔥 Prime Blog — Elite Esports • Community • Competitive 🔥</span>
+      <span>🔥 Prime Blog — Elite Esports • Community • Competitive 🔥</span>
+      <span>🔥 Prime Blog — Elite Esports • Community • Competitive 🔥</span>
+    </div>
+  </div>
+
+  <main>
+  <section class="page-hero">
+    <div class="container">
+      <div class="section-label">Roblox</div>
+      <h1>Roblox Scripts</h1>
+      <p class="lead">Copy the loadstring and paste it into your executor — no download needed.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:10px;">
+    <div class="container" style="max-width:720px;">
+
+      <div class="card hover-rise reveal" style="padding:22px;">
+        <div class="chip-row" style="margin-bottom:12px;">
+          <span class="chip">Roblox</span>
+          <span class="chip chip-live">Script</span>
+          <span class="chip">v1</span>
+        </div>
+        <h3 style="margin-bottom:6px;">Ride a pet Egg Finder v1</h3>
+        <p style="color:var(--text-secondary);font-size:0.92rem;margin-bottom:14px;">
+          Egg ESP · Player ESP · Speed · Teleports · Rose theme
+        </p>
+        <div class="script-preview" style="margin-bottom:18px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);background:#1a0f14;">
+          <img src="images/egg-finder-preview.png" alt="Ride a pet Egg Finder v1 — Rose Theme UI" style="width:100%;height:auto;display:block;" />
+        </div>
+
+        <!-- Copy loadstring box (like reference UI) -->
+        <div class="script-box" id="scriptBox">
+          <div class="script-box-top">
+            <span class="script-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <button type="button" class="script-copy-btn" id="copyScriptBtn" aria-label="Copy">
+              <span class="copy-icon">📋</span> <span id="copyLabel">Copy</span>
+            </button>
+          </div>
+          <pre class="script-code" id="scriptCode"><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/NemmarTV/main1/main/files/scripts/Ride-a-pet-Egg-Finder-v1.lua"))()</code></pre>
+        </div>
+
+        <ol style="margin-top:18px;color:var(--text-secondary);line-height:1.75;padding-left:18px;font-size:0.92rem;">
+          <li>Click <strong>Copy</strong> above.</li>
+          <li>Open your Roblox executor.</li>
+          <li>Paste the loadstring and execute in-game.</li>
+        </ol>
+        <p style="margin-top:12px;font-size:0.8rem;color:var(--text-muted);">
+          After you push this site to GitHub, the raw script URL must stay public for HttpGet to work.
+          Using executors can violate Roblox ToS and may risk your account.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<style>
+.script-box {
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+}
+.script-box-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #222;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.script-dots { display: flex; gap: 6px; }
+.script-dots i {
+  width: 10px; height: 10px; border-radius: 50%; display: block;
+  background: #ff5f57;
+}
+.script-dots i:nth-child(2) { background: #febc2e; }
+.script-dots i:nth-child(3) { background: #28c840; }
+.script-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.script-copy-btn:hover { background: rgba(255,107,2,0.2); border-color: rgba(255,107,2,0.45); }
+.script-copy-btn.copied { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.45); color: #4ade80; }
+.script-code {
+  margin: 0;
+  padding: 16px 14px;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #e8e8e8;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.script-code code {
+  color: #e8e8e8;
+}
+.script-code code::first-line {
+  /* subtle highlight for loadstring keyword feel */
+}
+</style>
+
+<script>
+(function () {
+  var btn = document.getElementById("copyScriptBtn");
+  var label = document.getElementById("copyLabel");
+  var codeEl = document.getElementById("scriptCode");
+  if (!btn || !codeEl) return;
+  var text = codeEl.textContent.trim();
+  btn.addEventListener("click", function () {
+    function ok() {
+      btn.classList.add("copied");
+      if (label) label.textContent = "Copied!";
+      setTimeout(function () {
+        btn.classList.remove("copied");
+        if (label) label.textContent = "Copy";
+      }, 1600);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(ok).catch(function () {
+        fallback();
+      });
+    } else {
+      fallback();
+    }
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); ok(); } catch (e) {}
+      ta.remove();
+    }
+  });
+})();
+</script>
+
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <img class="footer-logo" src="images/logo-prime.png" alt="Prime Blog" onerror="this.src='images/pt-logo.png'" />
+          <div class="footer-title">PRIME BLOG</div>
+          <p class="footer-desc">Elite esports community hub.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <a href="index.html">Home</a>
+     <a href="games.html">Games</a>
+          <a href="blog.html">News</a>
+          <a href="event.html">Events</a>
+          <a href="download.html">Downloads</a>
+        </div>
+        <div class="footer-col">
+          <h4>Community</h4>
+          <a href="about.html">About</a>
+          <a href="contact.html" target="_blank" rel="noopener">Discord</a>
+          <a href="contact.html">Support</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Prime Blog · Owner [Code.Dev] Nems .</div>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="YouTube">▶</a>
+          <a href="contact.html" target="_blank" rel="noopener" aria-label="Discord">D</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/maintenance.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/main.js"></script>
+<script src="js/update-checker.js"></script>
+</body>
+</html>
