@@ -2,7 +2,7 @@
    Login password: 1111
 */
 (function () {
-  var LOGIN_PASSWORD = "1111";
+  var LOGIN_PASSWORD = "WANTUSAWAN";
   var COUNTDOWN_SECS = 6;
 
   var screenEntry = document.getElementById("screenEntry");
