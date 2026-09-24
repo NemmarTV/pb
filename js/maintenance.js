@@ -7,11 +7,11 @@
 
 (() => {
   // ✅ MASTER SWITCH — true = site under maintenance
-  const MAINTENANCE_ON = true;
+  const MAINTENANCE_ON = false;
 
   // Optional end time for countdown (null = hide countdown)
   // Example: "2026-09-28T18:00:00+08:00"
-  const MAINTENANCE_END_ISO = "2026-09-28T23:59:00+08:00";
+  const MAINTENANCE_END_ISO = "2026-09-25T23:59:00+08:00";
 
   // Pages always allowed during maintenance
   const ALLOWLIST = [
