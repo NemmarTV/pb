@@ -1,5 +1,5 @@
 /* Prime Resources Private — download modal + per-file passwords
-   CF-PH: 1107 | Resource 1101: 1101 | Resource 1105: 1105
+   CFPT: 1107 | Resource 1101: 1101 | Resource 1105: 1105
 */
 (function () {
   var modal = document.getElementById("dlModal");

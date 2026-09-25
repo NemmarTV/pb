@@ -338,12 +338,20 @@ code { font-size: 0.85em; color: var(--accent2); }
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: rgba(255,107,2,0.12);
+  background: rgba(34,197,94,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
   flex-shrink: 0;
+  overflow: hidden;
+}
+.file-icon .pkg-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
 }
 .file-card-body h3 {
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;

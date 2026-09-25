@@ -1,14 +1,15 @@
 {
-  "version": "21.6",
-  "versionCode": 216,
+  "version": "21.7",
+  "versionCode": 217,
   "apkUrl": "https://www.mediafire.com/file/9jxpqwqsohpnida/PrimeblogV25.apk/file",
   "title": "New Update Available!",
-  "message": "Prime Blog V21.6 is ready.\n• Better update download (opens browser)\n• Performance improvements\n• Bug fixes",
+  "message": "Prime Blog V21.7 is ready.\n• CFPT package updated (ZIP + new launcher)\n• New CF-PH icon\n• UI improvements on Private Resources\n• Performance improvements\n• Bug fixes",
   "forceUpdate": false,
   "changelog": [
-    "Update button opens external browser",
-    "More reliable APK download",
-    "Performance improvements",
-    "Bug fixes"
+    "CFPT.zip replaces old CF-PH.rar",
+    "New Start.bat launcher with auto-sign & START confirmation",
+    "Updated CF-PH package icon",
+    "UI polish on Private Resources page",
+    "Version bump to 21.7"
   ]
 }
