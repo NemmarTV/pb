@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#2d3436" />
+  <title>Maintenance — Prime Blog</title>
+  <link rel="icon" href="images/pt-logo.png" />
+  <style>
+    :root {
+      --bg: #2d3436;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.1);
+      --text: #fff;
+      --muted: rgba(239,238,236,0.7);
+      --accent: #6c5ce7;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font);
+      color: var(--text);
+      background:
+        radial-gradient(ellipse 70% 45% at 50% -10%, rgba(108,92,231,0.16), transparent 55%),
+        #2d3436;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      line-height: 1.6;
+    }
+    .wrap { width: min(720px, 100%); display: grid; gap: 16px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(108,92,231,0.35);
+      background: rgba(108,92,231,0.12);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .brand-mini {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent);
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--accent);
+    }
+    .lead { color: var(--muted); font-size: 0.95rem; max-width: 54ch; }
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .unit {
+      text-align: center;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 8px;
+    }
+    .unit-num {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .unit-lab {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+    .notes { list-style: none; display: grid; gap: 10px; }
+    .notes li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+    .notes li strong { color: #fff; }
+    .tag {
+      flex-shrink: 0;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(108,92,231,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(108,92,231,0.3);
+    }
+    /* Special highlight for the spam warning */
+    .notes li.spam-warning {
+      background: rgba(255, 50, 50, 0.12);
+      border: 1px solid rgba(255, 80, 80, 0.45);
+    }
+    .notes li.spam-warning .tag {
+      background: rgba(255, 50, 50, 0.25);
+      color: #ff6b6b;
+      border-color: rgba(255, 80, 80, 0.5);
+    }
+    .notes li.spam-warning strong {
+      color: #ff8a8a;
+    }
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+      padding: 8px;
+    }
+    .footer span { color: var(--accent); }
+    .eta {
+      margin-top: 12px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .eta strong { color: #fff; }
+    @media (max-width: 520px) {
+      .countdown { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="top">
+        <div class="badge"><span class="dot"></span> Maintenance Mode</div>
+        <div class="brand-mini">PRIME BLOG</div>
+      </div>
+      <h1>We'll be right back</h1>
+      <p class="lead">
+        Prime Blog is temporarily offline for a scheduled <strong style="color:#fff;">12-hour system update</strong>.
+        We’re polishing the UI, tightening security, and fixing a few bugs. Thanks for your patience.
+      </p>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div class="unit"><div class="unit-num" id="d">--</div><div class="unit-lab">Days</div></div>
+        <div class="unit"><div class="unit-num" id="h">--</div><div class="unit-lab">Hours</div></div>
+        <div class="unit"><div class="unit-num" id="m">--</div><div class="unit-lab">Minutes</div></div>
+        <div class="unit"><div class="unit-num" id="s">--</div><div class="unit-lab">Seconds</div></div>
+      </div>
+      <p class="eta" id="eta">Estimated return: <strong>calculating…</strong></p>
+    </div>
+
+    <div class="card">
+      <h2>Update notes — what’s changing</h2>
+      <ul class="notes">
+        <li class="spam-warning">
+          <span class="tag">Spam Ban</span>
+          <span>
+            <strong>TANG INA MO DIN PALANG TURKISH 🇹🇷 SA PAG SPAM MO SA CONTACT FORM BAN KA MUNA BOY!</strong><br>
+            Contact form is temporarily disabled. You cannot send any messages right now.
+          </span>
+        </li>
+        <li>
+          <span class="tag">Contact</span>
+          <span>
+            <strong>Need info about the maintenance?</strong><br>
+            Contact <strong>Nemmartvy</strong> on Discord for more details.
+          </span>
+        </li>
+        <li>
+          <span class="tag">UI</span>
+          <span>
+            <strong>Changing UI Color</strong> — fresh color scheme and visual polish across the whole site.
+          </span>
+        </li>
+        <li>
+          <span class="tag">Coming</span>
+          <span>
+            <strong>Crossfire Bracket</strong> arriving sooner + more updates on the way.
+          </span>
+        </li>
+        <li>
+          <span class="tag">Feedback</span>
+          <span>
+            <strong>What do you want to send?</strong> Once the contact form is back online, feel free to drop suggestions, bug reports, or just say hi.
+          </span>
+        </li>
+        <li>
+          <span class="tag">Note</span>
+          <span>
+            <strong>All your data stays safe</strong> — no accounts or files will be lost during this maintenance.
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Status</h2>
+      <p class="lead" style="margin:0;">
+        There is <strong style="color:#fff;">no public bypass</strong> during this maintenance window.
+        When the work is finished, the owner will turn maintenance off and the full site will return automatically.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>While you wait</h2>
+      <ul class="notes">
+        <li><span class="tag">Tip</span> <span>Bookmark this page — it will refresh automatically when the site is back online.</span></li>
+        <li><span class="tag">Discord</span> <span>Contact <strong>Nemmartvy</strong> on Discord for live updates about the maintenance.</span></li>
+        <li><span class="tag">Note</span> <span>Contact form is offline until spam protection is improved.</span></li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      © 2026 <span>Prime Blog</span> · Owner <span>[Code.Dev] Nems</span>
+    </div>
+  </div>
+
+  <script src="js/maintenance.js"></script>
+  <script>
+    (function () {
+      var endISO = (window.LU_MAINT && window.LU_MAINT.endISO) || null;
+      var countdownEl = document.getElementById("countdown");
+      var etaEl = document.getElementById("eta");
+
+      if (!endISO) {
+        if (countdownEl) countdownEl.style.display = "none";
+        if (etaEl) etaEl.style.display = "none";
+        return;
+      }
+
+      var end = new Date(endISO).getTime();
+
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function formatReturnTime(ts) {
+        return new Date(ts).toLocaleString(undefined, {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        });
+      }
+
+      if (etaEl) {
+        etaEl.innerHTML = "Estimated return: <strong>" + formatReturnTime(end) + "</strong>";
+      }
+
+      function tick() {
+        var now = Date.now();
+        var diff = Math.max(0, end - now);
+
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById("d").textContent = d;
+        document.getElementById("h").textContent = pad(h);
+        document.getElementById("m").textContent = pad(m);
+        document.getElementById("s").textContent = pad(s);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
