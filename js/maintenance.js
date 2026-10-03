@@ -7,7 +7,7 @@
 
 (() => {
   // ✅ MASTER SWITCH — true = site under maintenance
-  const MAINTENANCE_ON = true;
+  const MAINTENANCE_ON = false;
 
   // 12-hour window (≈ 12 hours from 03:41 PDT)
   // Format: YYYY-MM-DDTHH:mm:ss±HH:mm
