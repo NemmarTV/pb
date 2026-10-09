@@ -46,20 +46,24 @@
           Any misuse, exploit attempt, or bypass attempt will result in a
           <strong>permanent account ban</strong> with no appeal.
         </p>
-        <p>Enter the access password below to continue.</p>
+        <p>Enter your credentials below to continue.</p>
       </div>
       <div class="scan-row">
         <span class="scan-dot"></span>
         <span id="scanStatus">Anti-Cheat Scanning</span>
       </div>
       <div class="lock-field">
+        <div class="lock-input-wrap" style="margin-bottom:10px;">
+          <input type="text" id="serverUsername" placeholder="Enter username" autocomplete="username" spellcheck="false" />
+        </div>
         <div class="lock-input-wrap">
-          <input type="password" id="serverPassword" placeholder="Enter access password" autocomplete="off" />
+          <input type="password" id="serverPassword" placeholder="Enter access password" autocomplete="current-password" />
           <button type="button" id="lockTogglePw" class="lock-eye" aria-label="Show password">👁</button>
         </div>
-        <p class="lock-error" id="lockError">Incorrect password. Access denied.</p>
+        <p class="lock-error" id="lockError">Incorrect username or password. Access denied.</p>
       </div>
       <div class="lock-countdown" id="lockCountdown">Wait <span id="countNum">6</span>s to activate…</div>
+      <p id="lockStatus" style="font-size:0.85rem;color:var(--muted,#888);margin:8px 0 4px;min-height:1.2em;"></p>
       <button type="button" id="enterBtn" class="btn-lock" disabled>ENTER SERVER</button>
     </div>
   </div>
@@ -71,7 +75,10 @@
         <img src="../../images/pt-logo.png" alt="Prime Blog" onerror="this.onerror=null;this.src='../../images/logo-prime.png'" />
         <span>Prime Blog</span>
       </a>
-      <span class="pkg-ver">v21.7</span>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="pkg-ver">v21.7</span>
+        <button type="button" id="pkgLogoutBtn" title="Log out" style="padding:5px 12px;font-size:0.72rem;font-weight:700;background:rgba(108,92,231,0.15);border:1px solid rgba(108,92,231,0.4);color:#a29bfe;border-radius:999px;cursor:pointer;font-family:inherit;">Logout</button>
+      </div>
     </header>
 
     <main class="pkg-main">
